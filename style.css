@@ -1,0 +1,48 @@
+body{
+  font-family: Arial, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 20px;
+}
+
+h1{
+  text-align: center;
+  color:rgb(0, 119, 255);
+}
+
+form{
+  max-width: 350px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: beige;
+  border-radius: 8px;
+}
+
+label{
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+input{
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+button{
+  padding: 10px;
+  background-color: rgb(4, 0, 255);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+#message{
+  text-align: center;
+  color: red;
+}
