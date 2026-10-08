@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Browse Books</title>
+        <link rel="stylesheet" href="dashboard.css">
+
+    </head>
+
+    <body>
+        <header class="title">
+
+            <h1>Library Management System</h1>
+            <a href="login.html" class="logout-button">Logout</a>
+
+        </header>
+
+        <main class="dashboard">
+
+        <a href="member.html" id="back-link" class="back-link">&larr; Back to Dashboard</a>
+
+        <h2>Browse Books</h2>
+
+        <p class="welcome-text">Search the catalogue by title or author.</p>
+
+        <div class="catalogue-controls">
+            <input type="text" id="search" placeholder="Search by title or author...">
+        </div>
+
+        <div class="dashboard-grid" id="book-list"></div>
+
+        </main>
+
+        <script src="catalogue.js"></script>
+    </body>
+</html>
