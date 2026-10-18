@@ -167,3 +167,30 @@ body{
     background-color: rgb(180,180,180);
     cursor: not-allowed;
 }
+
+
+.add-book-form {
+    max-width: 500px;
+    margin: 0 auto;
+
+}
+
+
+.add-book-form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.add-book-form input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+
+}
+
+.add-book-form .book-button{
+    display: block;
+    margin: 20px auto 0;
+}
