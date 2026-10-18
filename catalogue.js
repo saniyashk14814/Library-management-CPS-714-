@@ -1,15 +1,28 @@
-const books = [
-    { id: 1, title: "Calculus: Early Transcendentals", author: "James Stewart", category: "Math", available: true },
-    { id: 2, title: "Linear Algebra Done Right", author: "Sheldon Axler", category: "Math", available: true },
-    { id: 3, title: "A Brief History of Time", author: "Stephen Hawking", category: "Science", available: true },
-    { id: 4, title: "The Selfish Gene", author: "Richard Dawkins", category: "Science", available: false },
-    { id: 5, title: "Prisoners of Geography", author: "Tim Marshall", category: "Geography", available: true },
-    { id: 6, title: "Guns, Germs, and Steel", author: "Jared Diamond", category: "Geography", available: true },
-    { id: 7, title: "Sapiens", author: "Yuval Noah Harari", category: "History", available: true },
-    { id: 8, title: "The Silk Roads", author: "Peter Frankopan", category: "History", available: false },
-    { id: 9, title: "To Kill a Mockingbird", author: "Harper Lee", category: "Literature", available: true },
-    { id: 10, title: "Clean Code", author: "Robert C. Martin", category: "Computer Science", available: true }
+const defaultBooks = [
+    { id: 1, title: "Calculus: Early Transcendentals", author: "James Stewart", category: "Math", available: true, borrowedBy: null, dueDate: null },
+    { id: 2, title: "Linear Algebra Done Right", author: "Sheldon Axler", category: "Math", available: true, borrowedBy: null, dueDate: null  },
+    { id: 3, title: "A Brief History of Time", author: "Stephen Hawking", category: "Science", available: true, borrowedBy: null, dueDate: null  },
+    { id: 4, title: "The Selfish Gene", author: "Richard Dawkins", category: "Science", available: false , borrowedBy: "peter.griffin@yahoo.com", dueDate: "2026-10-31" },
+    { id: 5, title: "Prisoners of Geography", author: "Tim Marshall", category: "Geography", available: true, borrowedBy: null, dueDate: null  },
+    { id: 6, title: "Guns, Germs, and Steel", author: "Jared Diamond", category: "Geography", available: true, borrowedBy: null, dueDate: null  },
+    { id: 7, title: "Sapiens", author: "Yuval Noah Harari", category: "History", available: true, borrowedBy: null, dueDate: null  },
+    { id: 8, title: "The Silk Roads", author: "Peter Frankopan", category: "History", available: false, borrowedBy: "louisgriffin@gmail.com", dueDate: "2026-10-31"  },
+    { id: 9, title: "To Kill a Mockingbird", author: "Harper Lee", category: "Literature", available: true, borrowedBy: null, dueDate: null  },
+    { id: 10, title: "Clean Code", author: "Robert C. Martin", category: "Computer Science", available: true, borrowedBy: null, dueDate: null  }
 ];
+
+let books = JSON.parse(localStorage.getItem("books"));
+
+if (!books) {
+    books=defaultBooks;
+    localStorage.setItem("books", JSON.stringify(books));
+
+
+}
+
+function saveBooks(){
+    localStorage.setItem("books", JSON.stringify(books));
+}
 
 const role = new URLSearchParams(window.location.search).get("role") === "admin" ? "admin" : "member";
 
@@ -68,9 +81,18 @@ function lendBook(book) {
     const member = prompt(`Lend "${book.title}" to which member? (enter email)`);
     if (!member) return;
 
+    const dueDate = prompt("Enter due date (YYYY-MM-DD)");
+    if (!dueDate) return;
+
     book.available = false;
+    book.borrowedBy = member.toLowerCase();
+    book.dueDate = dueDate;
+
+    saveBooks();
+
     alert(`"${book.title}" has been lent to ${member}.`);
     renderBooks();
+    
 }
 
 
