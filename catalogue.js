@@ -68,7 +68,7 @@ function renderBooks() {
             button.onclick = () => lendBook(book);
         } else {
             button.textContent = book.available ? "Borrow" : "Request";
-            button.onclick = () => requestBook(book);
+            button.onclick = () => book.available ? borrowBook(book) : requestBook(book);
         }
 
         card.appendChild(button);
@@ -96,12 +96,26 @@ function lendBook(book) {
 }
 
 
+function borrowBook(book) {
+    const member = prompt(`Borrow "${book.title}". Enter your email:`);
+    if (!member) return;
+
+    const due = new Date();
+    due.setDate(due.getDate() + 14);
+
+    book.available = false;
+    book.borrowedBy = member.toLowerCase();
+    book.dueDate = due.toISOString().split("T")[0];
+
+    saveBooks();
+
+    alert(`You borrowed "${book.title}". It is due on ${book.dueDate}.`);
+    renderBooks();
+}
+
+
 function requestBook(book) {
-    if (book.available) {
-        alert(`Borrow request sent for "${book.title}". Pick it up at the front desk.`);
-    } else {
-        alert(`"${book.title}" is checked out. You'll be notified when it's available.`);
-    }
+    alert(`"${book.title}" is checked out. You'll be notified when it's available.`);
 }
 
 
