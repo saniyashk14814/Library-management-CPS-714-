@@ -66,6 +66,30 @@ function renderBooks() {
             button.textContent = "Lend";
             button.disabled = !book.available;
             button.onclick = () => lendBook(book);
+
+            const menuButton = document.createElement("button");
+            menuButton.className = "book-menu-button"
+            menuButton.textContent="⋮";
+
+            const menu=document.createElement("div");
+            menu.className="book-menu";
+            
+            const deleteButton=document.createElement("button");
+            deleteButton.className="delete-book-button";
+            deleteButton.textContent="Delete Book";
+
+            deleteButton.addEventListener("click", () => {
+                deleteBook(book.id);
+            });
+
+            menuButton.addEventListener("click", () => {
+                menu.classList.toggle("show");
+            });
+
+
+            menu.appendChild(deleteButton);
+            card.appendChild(menuButton);
+            card.appendChild(menu);
         } else {
             button.textContent = book.available ? "Borrow" : "Request";
             button.onclick = () => book.available ? borrowBook(book) : requestBook(book);
@@ -116,6 +140,28 @@ function borrowBook(book) {
 
 function requestBook(book) {
     alert(`"${book.title}" is checked out. You'll be notified when it's available.`);
+}
+
+function deleteBook(bookId){
+    const book = books.find(book => book.id === bookId);
+
+    if (!book){
+        return;
+    }
+    if (!book.available){
+        alert("This book cannot be deleted while it is checkedout.");
+        return;
+    }
+    const confirmed = confirm(`Are you sure you want to delete "${book.title}"?`);
+
+    if (!confirmed){
+        return;
+    }
+
+    books = books.filter(book =>book.id !== bookId);
+    saveBooks();
+    renderBooks();
+    
 }
 
 
