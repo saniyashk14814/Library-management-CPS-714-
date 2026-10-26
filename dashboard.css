@@ -124,6 +124,10 @@ body{
     transform: none;
 }
 
+.book-card{
+    position: relative;
+}
+
 .book-category{
     display: inline-block;
     font-size: 12px;
@@ -193,4 +197,47 @@ body{
 .add-book-form .book-button{
     display: block;
     margin: 20px auto 0;
+}
+
+.book-menu-button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+
+
+}
+
+.book-menu{
+    display: none;
+    position: absolute;
+    top:40px;
+    right: 10px;
+    background: none;
+    border: none;
+    padding: 5px;
+    z-index:10;
+
+}
+
+.book-menu.show{
+    display: block;
+}
+
+.delete-book-button {
+    border: none;
+    background-color: rgb(200,40,40);
+    color: white;
+    padding: 8px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.delete-book-button:hover{
+    background-color: rgb(160,30,30);
 }
