@@ -168,3 +168,65 @@ function deleteBook(bookId){
 searchInput.addEventListener("input", renderBooks);
 
 renderBooks();
+
+
+
+function assertEqual(actual,expected,name){
+    if (actual===expected){
+        console.log("PASS", name);
+    }else{
+        console.log("FAIL", name);
+
+    }
+}
+
+
+
+
+
+
+
+function testRemoveBook(){
+    const originalBooks=books;
+    books = [
+
+        {id:1, title: "Book One",author: "Author", category: "Math",available: true}
+    ];
+
+
+    const originalConfirm = window.confirm;
+    window.confirm=()=>true;
+    deleteBook(1);
+    assertEqual(
+        books.length, 0,"Remove Book works"
+    );
+    window.confirm=originalConfirm;
+    books=originalBooks;
+    localStorage.setItem("books",JSON.stringify(books));
+    renderBooks();
+}
+
+
+function testCheckedOutBookCannotBeRemoved(){
+    const originalBooks=books;
+    books = [
+
+        {id:1, title: "Book One",author: "Author", category: "Math",available: false}
+    ];
+
+
+ 
+    deleteBook(1);
+    assertEqual(
+        books.length, 1,"Checked out book cannot be removed"
+    );
+    books=originalBooks;
+    localStorage.setItem("books",JSON.stringify(books));
+    renderBooks();
+}
+
+
+testRemoveBook();
+testCheckedOutBookCannotBeRemoved();
+
+

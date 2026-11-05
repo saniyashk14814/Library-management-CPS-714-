@@ -61,4 +61,44 @@ function saveBook(){
     message.textContent = `"${title}" was updated successfully`;
 }
 
+function assertEqual(actual,expected,name){
+    if (actual===expected){
+        console.log("PASS", name);
+    }else{
+        console.log("FAIL", name);
+
+    }
+}
+
+
+
+
+function testEditBook(){
+    const originalBooks=books;
+    books = [{ id:1,title:"Old Title",author:"Author",category:"Math"}
+];
+
+bookSelect.innerHTML = '<option value="1">Old Title</option>';
+bookSelect.value="1";
+
+document.getElementById("title").value="New Title";
+document.getElementById("author").value="New Author";
+document.getElementById("category").value="Science";
+
+
+saveBook();
+assertEqual(books[0].title,"New Title","Edit Book Title works");
+assertEqual(books[0].author,"New Author","Edit Book Author works");
+assertEqual(books[0].category,"Science","Edit Book Category works");
+books=originalBooks;
+localStorage.setItem("books",JSON.stringify(books));
 loadBookList();
+
+}
+
+
+
+
+
+loadBookList();
+testEditBook();
