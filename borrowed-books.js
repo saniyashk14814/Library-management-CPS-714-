@@ -29,12 +29,7 @@ function showBorrowedBooks(){
         <p>by ${book.author}</p>
         <p><strong>Due Date:</strong> ${book.dueDate}</p>`;
 
-        const button = document.createElement("button");
-        button.className = "book-button";
-        button.textContent = "Return";
-        button.onclick = () => returnBook(book);
 
-        card.appendChild(button);
         borrowedBookList.appendChild(card);
     });
 }
